@@ -1,0 +1,18 @@
+[project]
+name = "ct_image_to_pic_list"
+version = "0.0.0"
+description = "Convert the CT image data in a 3D `numpy.ndarray` into a sequence of grayscale `PIL.Image.Image` objects."
+authors = [
+    {name = "GGN_2015",email = "neko@jlulug.org"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy", "pillow"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
