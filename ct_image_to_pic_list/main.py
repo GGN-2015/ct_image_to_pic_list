@@ -2,30 +2,30 @@ import numpy as np
 from PIL import Image
 from typing import Optional
 
-def calculate_quartiles(arr):
+def calculate_percentile(arr):
     flattened = arr.flatten()
-    q1 = np.percentile(flattened, 25, interpolation='linear')
-    q3 = np.percentile(flattened, 75, interpolation='linear')
-    return (q1, q3)
+    p01 = np.percentile(flattened, 1, method='linear')
+    p99 = np.percentile(flattened, 99, method='linear')
+    return (p01, p99)
 
 def convert_2darray_to_grey_image(arr: np.ndarray, min_val: Optional[float], max_val: Optional[float], lowerbound_show: Optional[float]) -> Image.Image:
     # Check if the input is a 2D array
     if arr.ndim != 2:
         raise ValueError("Input must be a 2D numpy array")
     
-    Q1, Q3 = calculate_quartiles(arr) # Calculate the two quartiles
+    P01, P99 = calculate_percentile(arr) # Calculate the two quartiles
 
     # Normalize the array to the range 0-255 (handles input with arbitrary value ranges)
     # Outlier handling is required here
     if min_val is not None:
         arr_min = min_val
     else:
-        arr_min = max(arr.min(), Q1 - 5.0 * (Q3 - Q1))
+        arr_min = P01
     
     if max_val is not None:
         arr_max = max_val
     else:
-        arr_max = min(arr.max(), Q3 + 5.0 * (Q3 - Q1))
+        arr_max = P99
     
     # Unify the value range
     arr = arr.copy()
