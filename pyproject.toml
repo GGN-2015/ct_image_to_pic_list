@@ -1,6 +1,6 @@
 [project]
 name = "ct_image_to_pic_list"
-version = "0.0.3"
+version = "0.0.4"
 description = "convert a 3d CT/MRI image (numpy) into pillow image list."
 authors = [
     {name = "GGN_2015",email = "neko@jlulug.org"}
