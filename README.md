@@ -1,5 +1,5 @@
 # ct_image_to_pic_list
-convert a 3d CT image (numpy) into pillow image list.
+convert a 3d CT/MRI image (numpy) into pillow image list.
 
 ## Installation
 ```bash
@@ -7,15 +7,35 @@ pip install ct_image_to_pic_list
 ```
 
 ## Usage
+
+reading 3d CT image.
+
 ```python
 import numpy as np
-from ct_image_to_pic_list import convert_3darray_to_grey_image_list
+from ct_image_to_pic_list import convert_ct_3darray_to_grey_image_list
 
 # construct you 3d CT image (HU value)
 arr3d = np.array([ ... ])
 
 # get a list of PIL.Image.Image
-img_list = convert_3darray_to_grey_image_list(arr3d)
+img_list = convert_ct_3darray_to_grey_image_list(arr3d)
+
+# save it if you want
+for index, img in enumerate(img_list):
+    img.save(f"{index:05d}.png")
+```
+
+reading 3d MRI image.
+
+```python
+import numpy as np
+from ct_image_to_pic_list import convert_mri_3darray_to_grey_image_list
+
+# construct you 3d MRI image (HU value)
+arr3d = np.array([ ... ])
+
+# get a list of PIL.Image.Image
+img_list = convert_mri_3darray_to_grey_image_list(arr3d)
 
 # save it if you want
 for index, img in enumerate(img_list):

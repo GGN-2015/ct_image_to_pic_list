@@ -44,7 +44,7 @@ def convert_2darray_to_grey_image(arr: np.ndarray, min_val: Optional[float], max
     img = Image.fromarray(normalized, mode='L')
     return img
 
-def convert_3darray_to_grey_image_list(arr3d: np.ndarray, min_val: Optional[float]=-200, max_val: Optional[float]=300, lowerbound_show: Optional[float]=None) -> list[Image.Image]:
+def convert_3darray_to_grey_image_list(arr3d: np.ndarray, min_val: Optional[float], max_val: Optional[float], lowerbound_show: Optional[float]) -> list[Image.Image]:
     # Check if the input is a 3D array
     if arr3d.ndim != 3:
         raise ValueError("Input must be a 3D numpy array")
@@ -58,3 +58,9 @@ def convert_3darray_to_grey_image_list(arr3d: np.ndarray, min_val: Optional[floa
         ans.append(img)
 
     return ans
+
+def convert_ct_3darray_to_grey_image_list(arr3d: np.ndarray, min_val: Optional[float]=-200, max_val: Optional[float]=300, lowerbound_show: Optional[float]=None) -> list[Image.Image]:
+    return convert_3darray_to_grey_image_list(arr3d, min_val, max_val, lowerbound_show)
+
+def convert_mri_3darray_to_grey_image_list(arr3d: np.ndarray, min_val: Optional[float]=0, max_val: Optional[float]=None, lowerbound_show: Optional[float]=None) -> list[Image.Image]:
+    return convert_3darray_to_grey_image_list(arr3d, min_val, max_val, lowerbound_show)
