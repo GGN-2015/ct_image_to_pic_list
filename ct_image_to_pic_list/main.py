@@ -20,12 +20,12 @@ def convert_2darray_to_grey_image(arr: np.ndarray, min_val: Optional[float], max
     if min_val is not None:
         arr_min = min_val
     else:
-        arr_min = max(arr.min(), Q1 - 3.0 * (Q3 - Q1))
+        arr_min = max(arr.min(), Q1 - 4.0 * (Q3 - Q1))
     
     if max_val is not None:
         arr_max = max_val
     else:
-        arr_max = min(arr.max(), Q3 + 3.0 * (Q3 - Q1))
+        arr_max = min(arr.max(), Q3 + 4.0 * (Q3 - Q1))
     
     # Unify the value range
     arr = arr.copy()
@@ -62,5 +62,5 @@ def convert_3darray_to_grey_image_list(arr3d: np.ndarray, min_val: Optional[floa
 def convert_ct_3darray_to_grey_image_list(arr3d: np.ndarray, min_val: Optional[float]=-200, max_val: Optional[float]=300, lowerbound_show: Optional[float]=None) -> list[Image.Image]:
     return convert_3darray_to_grey_image_list(arr3d, min_val, max_val, lowerbound_show)
 
-def convert_mri_3darray_to_grey_image_list(arr3d: np.ndarray, min_val: Optional[float]=0, max_val: Optional[float]=None, lowerbound_show: Optional[float]=None) -> list[Image.Image]:
+def convert_mri_3darray_to_grey_image_list(arr3d: np.ndarray, min_val: Optional[float]=70, max_val: Optional[float]=None, lowerbound_show: Optional[float]=None) -> list[Image.Image]:
     return convert_3darray_to_grey_image_list(arr3d, min_val, max_val, lowerbound_show)
